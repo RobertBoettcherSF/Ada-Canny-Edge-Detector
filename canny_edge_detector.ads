@@ -1,6 +1,5 @@
 -- canny_edge_detector.ads
 -- Specification for the Canny Edge Detector Algorithm
-with Ada.Numerics.Elementary_Functions;
 
 package Canny_Edge_Detector is
 
