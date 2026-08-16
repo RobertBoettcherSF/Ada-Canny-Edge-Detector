@@ -5,11 +5,12 @@ with Ada.Assertions; use Ada.Assertions;
 with Canny_Edge_Detector; use Canny_Edge_Detector;
 
 procedure Tests is
-   Img_Small : Image(1..3, 1..3) := (others => (others => 0.0));
-   Img_Valid : Image(1..10, 1..10) := (others => (others => 0.0));
-   Img_Out   : Image(1..10, 1..10);
-   Img_Mag   : Image(1..10, 1..10);
-   Img_Dir   : Image(1..10, 1..10);
+   Img_Small     : Image(1..3, 1..3) := (others => (others => 0.0));
+   Img_Small_Out : Image(1..3, 1..3);
+   Img_Valid     : Image(1..10, 1..10) := (others => (others => 0.0));
+   Img_Out       : Image(1..10, 1..10);
+   Img_Mag       : Image(1..10, 1..10);
+   Img_Dir       : Image(1..10, 1..10);
 
 begin
    Put_Line ("Starting V&V Test Suite for Canny Edge Detector...");
@@ -20,7 +21,7 @@ begin
    Put_Line ("TEST 1 - Image Size Boundaries");
    Put_Line ("  1.1 Assert processing a too-small image (<5x5) raises Invalid_Image_Size");
    begin
-      Apply_Canny(Img_Small, Img_Small, 10.0, 50.0);
+      Apply_Canny(Img_Small, Img_Small_Out, 10.0, 50.0);
       Assert(False, "Failed to raise Invalid_Image_Size");
    exception
       when Invalid_Image_Size => Put_Line ("      PASS");
