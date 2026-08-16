@@ -64,8 +64,15 @@ package body Canny_Edge_Detector is
             end if;
 
             -- Direction Mapping to 0, 45, 90, 135
-            Angle := Arctan (Y => Gy, X => Gx) * 180.0 / Ada.Numerics.Pi;
-            if Angle < 0.0 then Angle := Angle + 180.0; end if;
+            -- Avoid ADA.NUMERICS.ARGUMENT_ERROR when both Gx and Gy are 0 (e.g. uniform image)
+            if Gx = 0.0 and Gy = 0.0 then
+               Angle := 0.0;
+            else
+               Angle := Arctan (Y => Gy, X => Gx) * 180.0 / Ada.Numerics.Pi;
+               if Angle < 0.0 then 
+                  Angle := Angle + 180.0; 
+               end if;
+            end if;
 
             if (Angle >= 0.0 and Angle < 22.5) or (Angle >= 157.5 and Angle <= 180.0) then
                Direction (I, J) := 0.0;
